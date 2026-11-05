@@ -13,10 +13,26 @@ if (!msg) {
 	throw new Error("Message element not found");
 }
 
+const bcSame = document.querySelector<HTMLInputElement>("#bcSame");
+const bcFields = document.querySelector<HTMLDivElement>("#bcFields");
+
+if (!bcSame || !bcFields) {
+	throw new Error("Birth certificate name elements not found");
+}
+
+bcSame.addEventListener("change", () => {
+	bcFields.hidden = bcSame.checked;
+});
+
 f.addEventListener("submit", async (e) => {
 	e.preventDefault();
 	try {
 		const d = Object.fromEntries(new FormData(f)) as unknown as PetitionData;
+		if (bcSame.checked) {
+			d.bcFirst = d.curFirst;
+			d.bcMiddle = d.curMiddle;
+			d.bcLast = d.curLast;
+		}
 		d.fingerprintExhibit = (
 			f.elements.namedItem("fingerprintExhibit") as HTMLInputElement
 		).checked;
@@ -30,8 +46,8 @@ f.addEventListener("submit", async (e) => {
 		);
 		a.download = `Petition_${[d.newFirst, d.newMiddle, d.newLast].filter(Boolean).join("_") || "name_change"}.pdf`;
 		a.click();
-    msg.textContent = "Petition PDF generated successfully!";
-	} catch (err) {
-    msg.textContent = "Error generating petition PDF. Please try again.";
+		msg.textContent = "Petition PDF generated successfully!";
+	} catch (_err) {
+		msg.textContent = "Error generating petition PDF. Please try again.";
 	}
 });

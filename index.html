@@ -24,9 +24,12 @@
 
 			<fieldset>
 				<legend>Name on birth certificate</legend>
-				<label>First <input name="bcFirst" /></label>
-				<label>Middle <input name="bcMiddle" /></label>
-				<label>Last <input name="bcLast" /></label>
+				<label><input type="checkbox" id="bcSame" checked /> Same as current legal name</label>
+				<div id="bcFields" hidden>
+					<label>First <input name="bcFirst" /></label>
+					<label>Middle <input name="bcMiddle" /></label>
+					<label>Last <input name="bcLast" /></label>
+				</div>
 			</fieldset>
 
 			<fieldset>
