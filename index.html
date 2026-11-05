@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>FM-NCA-100 Petition Filler</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+	</head>
+
+	<body>
+		<h1>Texas Adult Name Change Petition (FM-NCA-100)</h1>
+		<p>
+			<small>
+				Runs entirely in your browser. Nothing is uploaded. Signatures, dates, cause and court numbers are left blank.
+			</small>
+		</p>
+		<button type="button" id="clear">Clear</button>
+		<form id="f">
+			<fieldset>
+				<legend>Current legal name</legend>
+				<label>First <input name="curFirst" /></label>
+				<label>Middle <input name="curMiddle" /></label>
+				<label>Last <input name="curLast" /></label>
+			</fieldset>
+
+			<fieldset>
+				<legend>Name on birth certificate</legend>
+				<label>First <input name="bcFirst" /></label>
+				<label>Middle <input name="bcMiddle" /></label>
+				<label>Last <input name="bcLast" /></label>
+			</fieldset>
+
+			<fieldset>
+				<legend>New name</legend>
+				<label>First <input name="newFirst" /></label>
+				<label>Middle <input name="newMiddle" /></label>
+				<label>Last <input name="newLast" /></label>
+				<br />
+				<label>Reason <input name="reason" size="50" value="That is the name I am known by" /></label>
+			</fieldset>
+
+			<fieldset>
+				<legend>Address</legend>
+				<label>Street <input name="street" size="30" /></label>
+				<label>City <input name="city" /></label>
+				<label>State <input name="state" size="4" value="TX" /></label>
+				<label>ZIP <input name="zip" size="7" /></label>
+				<label>County <input name="county" /></label>
+				<label>Country <input name="country" value="USA" /></label>
+			</fieldset>
+
+			<fieldset>
+				<legend>Birth / identity</legend>
+				<label>DOB <input name="dob" placeholder="MM/DD/YYYY" /></label>
+				<label>
+					Sex on birth certificate
+					<select name="sex">
+						<option value="">—</option>
+						<option>Male</option>
+						<option>Female</option>
+					</select>
+				</label>
+				<label>Race <input name="race" /></label>
+				<br />
+				<label>Birth city <input name="birthCity" /></label>
+				<label>County <input name="birthCounty" /></label>
+				<label>State <input name="birthState" /></label>
+				<label>Country <input name="birthCountry" value="USA" /></label>
+				<br />
+				<label>SSN last 3 <input name="ssn3" maxlength="3" size="4" pattern="\d{3}" /></label>
+				<label>DL last 3 <input name="dl3" maxlength="3" size="4" pattern="\d{3}" /></label>
+				<label>DL state <input name="dlState" size="4" value="TX" /></label>
+			</fieldset>
+
+			<fieldset>
+				<legend>Contact &amp; execution</legend>
+				<label>Phone <input name="phone" /></label>
+				<label>Email <input name="email" size="28" /></label>
+				<br />
+				<label>Executed in county <input name="execCounty" value="Travis" /></label>
+				<label>State <input name="execState" value="Texas" /></label>
+				<label><input type="checkbox" name="fingerprintExhibit" /> Fingerprint card attached (exhibit box)</label>
+			</fieldset>
+
+			<fieldset>
+				<legend>Criminal history</legend>
+				<label>
+					Sex offender registry
+					<select name="sexOffender">
+						<option>No</option>
+						<option>Yes</option>
+					</select>
+				</label>
+				<label>
+					Pending charges / convictions
+					<select name="charges">
+						<option>No</option>
+						<option>Yes</option>
+					</select>
+				</label>
+				<label>
+					Felony conviction
+					<select name="felony">
+						<option>No</option>
+						<option>Yes</option>
+					</select>
+				</label>
+				<br />
+				<small> If any is Yes, fill the offense details by hand in the downloaded PDF. </small>
+			</fieldset>
+
+			<button type="submit">Generate PDF</button>
+			<span id="msg"></span>
+		</form>
+	</body>
+</html>
