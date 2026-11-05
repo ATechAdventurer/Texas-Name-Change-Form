@@ -1,33 +1,91 @@
+* {
+	box-sizing: border-box;
+}
 body {
-	font: 15px system-ui;
+	font: 16px system-ui;
 	max-width: 820px;
-	margin: 2em auto;
+	margin: 1em auto;
 	padding: 0 1em;
+}
+h1 {
+	font-size: 1.4em;
+	line-height: 1.25;
 }
 fieldset {
 	margin: 1em 0;
+	min-width: 0;
 	border: 1px solid #ccc;
 	border-radius: 6px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+	gap: 0.6em 0.8em;
 }
-label {
-	display: inline-block;
-	margin: 0.3em 0.8em 0.3em 0;
-}
-input {
-	padding: 4px;
-}
-button {
-	padding: 8px 14px;
-	margin: 4px;
-	cursor: pointer;
-}
-#sig {
-	border: 1px solid #999;
-	border-radius: 4px;
-	max-width: 100%;
-	touch-action: none;
-	cursor: crosshair;
+legend {
+	font-weight: 600;
 }
 small {
 	color: #666;
+}
+fieldset > small,
+fieldset > #bcFields,
+fieldset
+	> label:has(
+		input[name="reason"],
+		input[name="street"],
+		input[type="checkbox"]
+	),
+#sig,
+#sigClear {
+	grid-column: 1 / -1;
+}
+#bcFields:not([hidden]) {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+	gap: 0.6em 0.8em;
+}
+label {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2em;
+	font-size: 0.9em;
+}
+label:has(input[type="checkbox"]) {
+	flex-direction: row;
+	align-items: center;
+	gap: 0.6em;
+}
+input,
+select {
+	width: 100%;
+	min-height: 44px;
+	padding: 6px 8px;
+	font: inherit; /* 16px avoids iOS focus-zoom */
+}
+input[type="checkbox"] {
+	width: 22px;
+	min-height: 22px;
+	flex: none;
+}
+button {
+	min-height: 44px;
+	padding: 8px 16px;
+	margin: 4px;
+	font: inherit;
+	cursor: pointer;
+}
+button[type="submit"] {
+	width: 100%;
+	margin: 0 0 0.5em;
+}
+#sig {
+	width: 100%;
+	height: auto;
+	border: 1px solid #999;
+	border-radius: 4px;
+	touch-action: none;
+	cursor: crosshair;
+}
+#sigClear {
+	justify-self: start;
+	margin: 0;
 }
