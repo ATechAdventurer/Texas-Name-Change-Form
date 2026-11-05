@@ -134,6 +134,7 @@ export async function fillPetition(
 	for (const [k, names] of Object.entries(TEXT_MAP) as [TextKey, string[]][]) {
 		let v = (d[k] ?? "").toString().trim();
 		if ((k === "ssn3" || k === "dl3") && v) v = last3(v);
+		if (k === "dob") v = v.replace(/^(\d{4})-(\d\d)-(\d\d)$/, "$2/$3/$1"); // date input gives ISO
 		if (v) for (const n of names) form.getTextField(n).setText(v);
 	}
 	const printed = [d.curFirst, d.curMiddle, d.curLast]
