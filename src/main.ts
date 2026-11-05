@@ -2,7 +2,11 @@ import "./style.css";
 
 import { fillPetition, type PetitionData } from "./fill";
 
-const f = document.querySelector<HTMLFormElement>("#f")!;
+const f = document.querySelector<HTMLFormElement>("#f");
+
+if (!f) {
+	throw new Error("Form not found");
+}
 
 f.addEventListener("submit", async (e) => {
 	e.preventDefault();
