@@ -10,7 +10,8 @@
 		<h1>Texas Adult Name Change Petition (FM-NCA-100)</h1>
 		<p>
 			<small>
-				This form works entirely in your browser. No data is sent to any server. You can save the filled form as a PDF and print it for submission to the court.
+				This form works entirely in your browser. No data is sent to any server. You can save the filled form as a PDF
+				and print it for submission to the court.
 			</small>
 		</p>
 		<button type="button" id="clear">Clear</button>
@@ -45,9 +46,12 @@
 				<legend>Address</legend>
 				<label>Street <input name="street" required size="30" /></label>
 				<label>City <input name="city" required /></label>
-				<label>State <input name="state" required size="4" value="TX" /></label>
+				<label>State <select name="state" required data-states></select></label>
 				<label>ZIP <input name="zip" required size="7" /></label>
-				<label>County <input name="county" required /></label>
+				<label>
+					County <select name="county" required data-counties></select>
+					<input name="county" required hidden disabled />
+				</label>
 				<label>Country <input name="country" required value="USA" /></label>
 			</fieldset>
 
@@ -65,13 +69,16 @@
 				<label>Race <input name="race" required /></label>
 				<br />
 				<label>Birth city <input name="birthCity" required /></label>
-				<label>County <input name="birthCounty" required /></label>
-				<label>State <input name="birthState" required /></label>
+				<label>
+					County <select name="birthCounty" required data-counties hidden disabled></select>
+					<input name="birthCounty" required />
+				</label>
+				<label>State <select name="birthState" required data-states></select></label>
 				<label>Country <input name="birthCountry" required value="USA" /></label>
 				<br />
 				<label>SSN last 3 <input name="ssn3" maxlength="3" size="4" pattern="\d{3}" /></label>
 				<label>DL last 3 <input name="dl3" maxlength="3" size="4" pattern="\d{3}" /></label>
-				<label>DL state <input name="dlState" size="4" value="TX" /></label>
+				<label>DL state <select name="dlState" data-states></select></label>
 			</fieldset>
 
 			<fieldset>
@@ -79,8 +86,11 @@
 				<label>Phone <input name="phone" required /></label>
 				<label>Email <input name="email" size="28" /></label>
 				<br />
-				<label>Executed in county <input name="execCounty" required value="Travis" /></label>
-				<label>State <input name="execState" required value="Texas" /></label>
+				<label>
+					Executed in county <select name="execCounty" required data-counties data-default="Travis"></select>
+					<input name="execCounty" required hidden disabled />
+				</label>
+				<label>State <select name="execState" required data-states></select></label>
 				<label><input type="checkbox" name="fingerprintExhibit" /> Fingerprint card attached (exhibit box)</label>
 			</fieldset>
 
