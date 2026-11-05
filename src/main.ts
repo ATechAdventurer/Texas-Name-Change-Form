@@ -3,9 +3,14 @@ import "./style.css";
 import { fillPetition, type PetitionData } from "./fill";
 
 const f = document.querySelector<HTMLFormElement>("#f");
+const msg = document.querySelector<HTMLDivElement>("#msg");
 
 if (!f) {
 	throw new Error("Form not found");
+}
+
+if (!msg) {
+	throw new Error("Message element not found");
 }
 
 f.addEventListener("submit", async (e) => {
@@ -25,8 +30,8 @@ f.addEventListener("submit", async (e) => {
 		);
 		a.download = `Petition_${[d.newFirst, d.newMiddle, d.newLast].filter(Boolean).join("_") || "name_change"}.pdf`;
 		a.click();
-		console.log("Downloaded petition PDF");
+    msg.textContent = "Petition PDF generated successfully!";
 	} catch (err) {
-		console.error("Error filling petition PDF", err);
+    msg.textContent = "Error generating petition PDF. Please try again.";
 	}
 });
