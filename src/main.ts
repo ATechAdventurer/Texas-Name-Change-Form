@@ -31,11 +31,67 @@ const syncBc = () => {
 
 bcSame.addEventListener("change", syncBc);
 
+const sig = document.querySelector<HTMLCanvasElement>("#sig");
+const sigCtx = sig?.getContext("2d");
+
+if (!sig || !sigCtx) {
+	throw new Error("Signature canvas not found");
+}
+
+sigCtx.lineWidth = 2;
+sigCtx.lineCap = "round";
+sigCtx.lineJoin = "round";
+
+let signed = false;
+let drawing = false;
+
+const sigPoint = (e: PointerEvent) => {
+	const r = sig.getBoundingClientRect();
+	return {
+		x: ((e.clientX - r.left) * sig.width) / r.width,
+		y: ((e.clientY - r.top) * sig.height) / r.height,
+	};
+};
+
+sig.addEventListener("pointerdown", (e) => {
+	drawing = true;
+	signed = true;
+	sig.setPointerCapture(e.pointerId);
+	const { x, y } = sigPoint(e);
+	sigCtx.beginPath();
+	sigCtx.moveTo(x, y);
+	sigCtx.lineTo(x, y);
+	sigCtx.stroke();
+});
+
+sig.addEventListener("pointermove", (e) => {
+	if (!drawing) return;
+	const { x, y } = sigPoint(e);
+	sigCtx.lineTo(x, y);
+	sigCtx.stroke();
+});
+
+for (const ev of ["pointerup", "pointercancel"]) {
+	sig.addEventListener(ev, () => {
+		drawing = false;
+	});
+}
+
+const clearSig = () => {
+	sigCtx.clearRect(0, 0, sig.width, sig.height);
+	signed = false;
+};
+
+document
+	.querySelector<HTMLButtonElement>("#sigClear")
+	?.addEventListener("click", clearSig);
+
 document
 	.querySelector<HTMLButtonElement>("#clear")
 	?.addEventListener("click", () => {
 		f.reset();
 		syncBc();
+		clearSig();
 		msg.textContent = "";
 	});
 
@@ -51,6 +107,10 @@ f.addEventListener("submit", async (e) => {
 		d.fingerprintExhibit = (
 			f.elements.namedItem("fingerprintExhibit") as HTMLInputElement
 		).checked;
+		if (signed) {
+			const blob = await new Promise<Blob | null>((r) => sig.toBlob(r));
+			if (blob) d.signature = new Uint8Array(await blob.arrayBuffer());
+		}
 		const tpl = await (
 			await fetch(`${import.meta.env.BASE_URL}template.pdf`)
 		).arrayBuffer();

@@ -1,4 +1,4 @@
-import { PDFDocument, type PDFField, PDFName } from "pdf-lib";
+import { PDFDocument, type PDFField, PDFHexString, PDFName } from "pdf-lib";
 
 export interface PetitionData {
 	curFirst?: string;
@@ -35,11 +35,18 @@ export interface PetitionData {
 	charges?: "Yes" | "No";
 	felony?: "Yes" | "No";
 	fingerprintExhibit?: boolean;
+	/** PNG bytes of the drawn signature; omitted when left blank. */
+	signature?: Uint8Array;
 }
 
 type TextKey = Exclude<
 	keyof PetitionData,
-	"sex" | "sexOffender" | "charges" | "felony" | "fingerprintExhibit"
+	| "sex"
+	| "sexOffender"
+	| "charges"
+	| "felony"
+	| "fingerprintExhibit"
+	| "signature"
 >;
 
 const TEXT_MAP: Record<TextKey, string[]> = {
@@ -96,6 +103,28 @@ function selectOption(field: PDFField, value: string): void {
 	}
 }
 
+/** pdf-lib has no signature-field API, so build the /Sig widget by hand. */
+function addSignatureField(
+	pdf: PDFDocument,
+	pageIndex: number,
+	rect: [number, number, number, number],
+	name: string,
+): void {
+	const page = pdf.getPage(pageIndex);
+	const widget = pdf.context.obj({
+		Type: "Annot",
+		Subtype: "Widget",
+		FT: "Sig",
+		T: PDFHexString.fromText(name),
+		Rect: rect,
+		F: 4,
+		P: page.ref,
+	});
+	const ref = pdf.context.register(widget);
+	page.node.addAnnot(ref);
+	pdf.getForm().acroForm.addField(ref);
+}
+
 export async function fillPetition(
 	templateBytes: ArrayBuffer | Uint8Array,
 	d: PetitionData,
@@ -119,5 +148,17 @@ export async function fillPetition(
 		if (v) selectOption(form.getField(n), v);
 	}
 	if (d.fingerprintExhibit) form.getCheckBox("chk-attached-document1").check();
+	// Page 4 has two signature lines: the petition (section 6) and the perjury declaration (section 7).
+	const slots = [
+		{ name: "signature", x: 65, y: 594, w: 260, h: 30 },
+		{ name: "signature2", x: 330, y: 272, w: 215, h: 28 },
+	];
+	const img = d.signature && (await pdf.embedPng(d.signature));
+	for (const { name, x, y, w, h } of slots) {
+		if (img) {
+			const { width, height } = img.scaleToFit(w, h);
+			pdf.getPage(3).drawImage(img, { x, y, width, height });
+		} else addSignatureField(pdf, 3, [x, y, x + w, y + h], name);
+	}
 	return pdf.save(); // fields stay editable
 }
