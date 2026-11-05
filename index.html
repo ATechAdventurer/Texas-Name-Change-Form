@@ -10,7 +10,8 @@
 		<h1>Texas Adult Name Change Petition (FM-NCA-100)</h1>
 		<p>
 			<small>
-				Runs entirely in your browser. Nothing is uploaded. Signatures, dates, cause and court numbers are left blank.
+				Runs entirely in your browser. Nothing is uploaded. Dates, cause and court numbers are left blank, and the
+				signature is optional.
 			</small>
 		</p>
 		<button type="button" id="clear">Clear</button>
@@ -109,6 +110,14 @@
 				</label>
 				<br />
 				<small> If any is Yes, fill the offense details by hand in the downloaded PDF. </small>
+			</fieldset>
+
+			<fieldset>
+				<legend>Signature (optional)</legend>
+				<canvas id="sig" width="500" height="120"></canvas>
+				<br />
+				<button type="button" id="sigClear">Clear signature</button>
+				<small> Draw with mouse or finger. Leave blank to sign by hand after printing. </small>
 			</fieldset>
 
 			<button type="submit">Generate PDF</button>
