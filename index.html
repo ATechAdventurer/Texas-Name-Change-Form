@@ -17,9 +17,9 @@
 		<form id="f">
 			<fieldset>
 				<legend>Current legal name</legend>
-				<label>First <input name="curFirst" /></label>
+				<label>First <input name="curFirst" required /></label>
 				<label>Middle <input name="curMiddle" /></label>
-				<label>Last <input name="curLast" /></label>
+				<label>Last <input name="curLast" required /></label>
 			</fieldset>
 
 			<fieldset>
@@ -34,40 +34,40 @@
 
 			<fieldset>
 				<legend>New name</legend>
-				<label>First <input name="newFirst" /></label>
+				<label>First <input name="newFirst" required /></label>
 				<label>Middle <input name="newMiddle" /></label>
-				<label>Last <input name="newLast" /></label>
+				<label>Last <input name="newLast" required /></label>
 				<br />
-				<label>Reason <input name="reason" size="50" value="That is the name I am known by" /></label>
+				<label>Reason <input name="reason" required size="50" value="That is the name I am known by" /></label>
 			</fieldset>
 
 			<fieldset>
 				<legend>Address</legend>
-				<label>Street <input name="street" size="30" /></label>
-				<label>City <input name="city" /></label>
-				<label>State <input name="state" size="4" value="TX" /></label>
-				<label>ZIP <input name="zip" size="7" /></label>
-				<label>County <input name="county" /></label>
-				<label>Country <input name="country" value="USA" /></label>
+				<label>Street <input name="street" required size="30" /></label>
+				<label>City <input name="city" required /></label>
+				<label>State <input name="state" required size="4" value="TX" /></label>
+				<label>ZIP <input name="zip" required size="7" /></label>
+				<label>County <input name="county" required /></label>
+				<label>Country <input name="country" required value="USA" /></label>
 			</fieldset>
 
 			<fieldset>
 				<legend>Birth / identity</legend>
-				<label>DOB <input name="dob" placeholder="MM/DD/YYYY" /></label>
+				<label>DOB <input name="dob" required placeholder="MM/DD/YYYY" /></label>
 				<label>
 					Sex on birth certificate
-					<select name="sex">
+					<select name="sex" required>
 						<option value="">—</option>
 						<option>Male</option>
 						<option>Female</option>
 					</select>
 				</label>
-				<label>Race <input name="race" /></label>
+				<label>Race <input name="race" required /></label>
 				<br />
-				<label>Birth city <input name="birthCity" /></label>
-				<label>County <input name="birthCounty" /></label>
-				<label>State <input name="birthState" /></label>
-				<label>Country <input name="birthCountry" value="USA" /></label>
+				<label>Birth city <input name="birthCity" required /></label>
+				<label>County <input name="birthCounty" required /></label>
+				<label>State <input name="birthState" required /></label>
+				<label>Country <input name="birthCountry" required value="USA" /></label>
 				<br />
 				<label>SSN last 3 <input name="ssn3" maxlength="3" size="4" pattern="\d{3}" /></label>
 				<label>DL last 3 <input name="dl3" maxlength="3" size="4" pattern="\d{3}" /></label>
@@ -76,11 +76,11 @@
 
 			<fieldset>
 				<legend>Contact &amp; execution</legend>
-				<label>Phone <input name="phone" /></label>
+				<label>Phone <input name="phone" required /></label>
 				<label>Email <input name="email" size="28" /></label>
 				<br />
-				<label>Executed in county <input name="execCounty" value="Travis" /></label>
-				<label>State <input name="execState" value="Texas" /></label>
+				<label>Executed in county <input name="execCounty" required value="Travis" /></label>
+				<label>State <input name="execState" required value="Texas" /></label>
 				<label><input type="checkbox" name="fingerprintExhibit" /> Fingerprint card attached (exhibit box)</label>
 			</fieldset>
 

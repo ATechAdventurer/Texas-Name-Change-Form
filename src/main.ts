@@ -20,15 +20,22 @@ if (!bcSame || !bcFields) {
 	throw new Error("Birth certificate name elements not found");
 }
 
-bcSame.addEventListener("change", () => {
+const bcRequired = ["bcFirst", "bcLast"].map(
+	(n) => f.elements.namedItem(n) as HTMLInputElement,
+);
+
+const syncBc = () => {
 	bcFields.hidden = bcSame.checked;
-});
+	for (const el of bcRequired) el.required = !bcSame.checked;
+};
+
+bcSame.addEventListener("change", syncBc);
 
 document
 	.querySelector<HTMLButtonElement>("#clear")
 	?.addEventListener("click", () => {
 		f.reset();
-		bcFields.hidden = bcSame.checked;
+		syncBc();
 		msg.textContent = "";
 	});
 
