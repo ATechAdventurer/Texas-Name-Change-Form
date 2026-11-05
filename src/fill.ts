@@ -154,6 +154,15 @@ export async function fillPetition(
 		{ name: "signature2", x: 330, y: 272, w: 215, h: 28 },
 	];
 	const img = d.signature && (await pdf.embedPng(d.signature));
+	if (img) {
+		const today = new Date().toLocaleDateString("en-US", {
+			month: "2-digit",
+			day: "2-digit",
+			year: "numeric",
+		});
+		for (const n of ["signature-date", "signature-date2"])
+			form.getTextField(n).setText(today);
+	}
 	for (const { name, x, y, w, h } of slots) {
 		if (img) {
 			const { width, height } = img.scaleToFit(w, h);
