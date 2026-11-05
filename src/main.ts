@@ -24,6 +24,14 @@ bcSame.addEventListener("change", () => {
 	bcFields.hidden = bcSame.checked;
 });
 
+document
+	.querySelector<HTMLButtonElement>("#clear")
+	?.addEventListener("click", () => {
+		f.reset();
+		bcFields.hidden = bcSame.checked;
+		msg.textContent = "";
+	});
+
 f.addEventListener("submit", async (e) => {
 	e.preventDefault();
 	try {
