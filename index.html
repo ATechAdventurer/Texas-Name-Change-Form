@@ -8,131 +8,133 @@
 	</head>
 
 	<body>
-		<h1>Texas Adult Name Change Petition (FM-NCA-100)</h1>
-		<p>
-			<small>
-				This form works entirely in your browser. No data is sent to any server. You can save the filled form as a PDF
-				and print it for submission to the court.
-			</small>
-		</p>
-		<button type="button" id="clear">Clear</button>
-		<form id="f">
-			<fieldset>
-				<legend>Current legal name</legend>
-				<label>First <input name="curFirst" required /></label>
-				<label>Middle <input name="curMiddle" /></label>
-				<label>Last <input name="curLast" required /></label>
-			</fieldset>
+		<main>
+			<h1>Texas Adult Name Change Petition (FM-NCA-100)</h1>
+			<p>
+				<small>
+					This form works entirely in your browser. No data is sent to any server. You can save the filled form as a PDF
+					and print it for submission to the court.
+				</small>
+			</p>
+			<button type="button" id="clear">Clear</button>
+			<form id="f">
+				<fieldset>
+					<legend>Current legal name</legend>
+					<label>First <input name="curFirst" required /></label>
+					<label>Middle <input name="curMiddle" /></label>
+					<label>Last <input name="curLast" required /></label>
+				</fieldset>
 
-			<fieldset>
-				<legend>Name on birth certificate</legend>
-				<label><input type="checkbox" id="bcSame" checked /> Same as current legal name</label>
-				<div id="bcFields" hidden>
-					<label>First <input name="bcFirst" /></label>
-					<label>Middle <input name="bcMiddle" /></label>
-					<label>Last <input name="bcLast" /></label>
-				</div>
-			</fieldset>
+				<fieldset>
+					<legend>Name on birth certificate</legend>
+					<label><input type="checkbox" id="bcSame" checked /> Same as current legal name</label>
+					<div id="bcFields" hidden>
+						<label>First <input name="bcFirst" /></label>
+						<label>Middle <input name="bcMiddle" /></label>
+						<label>Last <input name="bcLast" /></label>
+					</div>
+				</fieldset>
 
-			<fieldset>
-				<legend>New name</legend>
-				<label>First <input name="newFirst" required /></label>
-				<label>Middle <input name="newMiddle" /></label>
-				<label>Last <input name="newLast" required /></label>
-				<br />
-				<label>Reason <input name="reason" required size="50" value="That is the name I am known by" /></label>
-			</fieldset>
+				<fieldset>
+					<legend>New name</legend>
+					<label>First <input name="newFirst" required /></label>
+					<label>Middle <input name="newMiddle" /></label>
+					<label>Last <input name="newLast" required /></label>
+					<br />
+					<label>Reason <input name="reason" required size="50" value="That is the name I am known by" /></label>
+				</fieldset>
 
-			<fieldset>
-				<legend>Address</legend>
-				<label>Street <input name="street" required size="30" /></label>
-				<label>City <input name="city" required /></label>
-				<label>State <select name="state" required data-states></select></label>
-				<label>ZIP <input name="zip" required size="7" /></label>
-				<label>
-					County <select name="county" required data-counties></select>
-					<input name="county" required hidden disabled />
-				</label>
-				<label>Country <input name="country" required value="USA" /></label>
-			</fieldset>
+				<fieldset>
+					<legend>Address</legend>
+					<label>Street <input name="street" required size="30" /></label>
+					<label>City <input name="city" required /></label>
+					<label>State <select name="state" required data-states></select></label>
+					<label>ZIP <input name="zip" required size="7" /></label>
+					<label>
+						County <select name="county" required data-counties></select>
+						<input name="county" required hidden disabled />
+					</label>
+					<label>Country <input name="country" required value="USA" /></label>
+				</fieldset>
 
-			<fieldset>
-				<legend>Birth / identity</legend>
-				<label>DOB <input name="dob" type="date" required min="1900-01-01" /></label>
-				<label>
-					Sex on birth certificate
-					<select name="sex" required>
-						<option value="">—</option>
-						<option>Male</option>
-						<option>Female</option>
-					</select>
-				</label>
-				<label>Race <input name="race" required /></label>
-				<br />
-				<label>Birth city <input name="birthCity" required /></label>
-				<label>
-					County <select name="birthCounty" required data-counties hidden disabled></select>
-					<input name="birthCounty" required />
-				</label>
-				<label>State <select name="birthState" required data-states></select></label>
-				<label>Country <input name="birthCountry" required value="USA" /></label>
-				<br />
-				<label>SSN last 3 <input name="ssn3" maxlength="3" size="4" pattern="\d{3}" /></label>
-				<label>DL last 3 <input name="dl3" maxlength="3" size="4" pattern="\d{3}" /></label>
-				<label>DL state <select name="dlState" data-states></select></label>
-			</fieldset>
+				<fieldset>
+					<legend>Birth / identity</legend>
+					<label>DOB <input name="dob" type="date" required min="1900-01-01" /></label>
+					<label>
+						Sex on birth certificate
+						<select name="sex" required>
+							<option value="">—</option>
+							<option>Male</option>
+							<option>Female</option>
+						</select>
+					</label>
+					<label>Race <input name="race" required /></label>
+					<br />
+					<label>Birth city <input name="birthCity" required /></label>
+					<label>
+						County <select name="birthCounty" required data-counties hidden disabled></select>
+						<input name="birthCounty" required />
+					</label>
+					<label>State <select name="birthState" required data-states></select></label>
+					<label>Country <input name="birthCountry" required value="USA" /></label>
+					<br />
+					<label>SSN last 3 <input name="ssn3" maxlength="3" size="4" pattern="\d{3}" /></label>
+					<label>DL last 3 <input name="dl3" maxlength="3" size="4" pattern="\d{3}" /></label>
+					<label>DL state <select name="dlState" data-states></select></label>
+				</fieldset>
 
-			<fieldset>
-				<legend>Contact &amp; execution</legend>
-				<label>Phone <input name="phone" required /></label>
-				<label>Email <input name="email" size="28" /></label>
-				<br />
-				<label>
-					Executed in county <select name="execCounty" required data-counties data-default="Travis"></select>
-					<input name="execCounty" required hidden disabled />
-				</label>
-				<label>State <select name="execState" required data-states></select></label>
-				<label><input type="checkbox" name="fingerprintExhibit" /> Fingerprint card attached (exhibit box)</label>
-			</fieldset>
+				<fieldset>
+					<legend>Contact &amp; execution</legend>
+					<label>Phone <input name="phone" required /></label>
+					<label>Email <input name="email" size="28" /></label>
+					<br />
+					<label>
+						Executed in county <select name="execCounty" required data-counties data-default="Travis"></select>
+						<input name="execCounty" required hidden disabled />
+					</label>
+					<label>State <select name="execState" required data-states></select></label>
+					<label><input type="checkbox" name="fingerprintExhibit" /> Fingerprint card attached (exhibit box)</label>
+				</fieldset>
 
-			<fieldset>
-				<legend>Criminal history</legend>
-				<label>
-					Sex offender registry
-					<select name="sexOffender">
-						<option>No</option>
-						<option>Yes</option>
-					</select>
-				</label>
-				<label>
-					Pending charges / convictions
-					<select name="charges">
-						<option>No</option>
-						<option>Yes</option>
-					</select>
-				</label>
-				<label>
-					Felony conviction
-					<select name="felony">
-						<option>No</option>
-						<option>Yes</option>
-					</select>
-				</label>
-				<br />
-				<small> If any is Yes, fill the offense details by hand in the downloaded PDF. </small>
-			</fieldset>
+				<fieldset>
+					<legend>Criminal history</legend>
+					<label>
+						Sex offender registry
+						<select name="sexOffender">
+							<option>No</option>
+							<option>Yes</option>
+						</select>
+					</label>
+					<label>
+						Pending charges / convictions
+						<select name="charges">
+							<option>No</option>
+							<option>Yes</option>
+						</select>
+					</label>
+					<label>
+						Felony conviction
+						<select name="felony">
+							<option>No</option>
+							<option>Yes</option>
+						</select>
+					</label>
+					<br />
+					<small> If any is Yes, fill the offense details by hand in the downloaded PDF. </small>
+				</fieldset>
 
-			<fieldset>
-				<legend>Signature (optional)</legend>
-				<canvas id="sig" width="500" height="120"></canvas>
-				<br />
-				<button type="button" id="sigClear">Clear signature</button>
-				<small> Draw with mouse or finger. Leave blank to sign by hand after printing. </small>
-			</fieldset>
+				<fieldset>
+					<legend>Signature (optional)</legend>
+					<canvas id="sig" width="500" height="120"></canvas>
+					<br />
+					<button type="button" id="sigClear">Clear signature</button>
+					<small> Draw with mouse or finger. Leave blank to sign by hand after printing. </small>
+				</fieldset>
 
-			<button type="submit">Generate PDF</button>
-			<span id="msg"></span>
-		</form>
+				<button type="submit">Generate PDF</button>
+				<span id="msg"></span>
+			</form>
+		</main>
 		<footer>
 			<small>
 				<a href="https://github.com/ATechAdventurer/Texas-Name-Change-Form">View source</a>

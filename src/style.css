@@ -35,7 +35,7 @@ h1 {
 	text-wrap: balance;
 	margin: 0 0 0.75rem;
 }
-body > p {
+main > p {
 	max-width: 65ch;
 	margin: 0 0 1.5rem;
 }
@@ -73,7 +73,7 @@ fieldset
 #sigClear {
 	grid-column: 1 / -1;
 }
-body > p small {
+main > p small {
 	font-size: 1rem;
 	color: var(--ink-soft);
 }
