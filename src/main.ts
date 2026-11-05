@@ -1,6 +1,7 @@
 import "./style.css";
 
 import { fillPetition, type PetitionData } from "./fill";
+import { TX_COUNTIES, US_STATES } from "./states";
 
 const f = document.querySelector<HTMLFormElement>("#f");
 const msg = document.querySelector<HTMLDivElement>("#msg");
@@ -12,6 +13,62 @@ if (!f) {
 if (!msg) {
 	throw new Error("Message element not found");
 }
+
+// Texas is listed first and selected by default; the rest follow alphabetically
+const statesTxFirst = [
+	...US_STATES.filter(([code]) => code === "TX"),
+	...US_STATES.filter(([code]) => code !== "TX"),
+];
+
+for (const sel of f.querySelectorAll<HTMLSelectElement>(
+	"select[data-states]",
+)) {
+	for (const [code, name] of statesTxFirst) {
+		// defaultSelected keeps form.reset() returning to Texas
+		const isTx = code === "TX";
+		sel.add(new Option(name, code, isTx, isTx));
+	}
+	if (!sel.required) sel.add(new Option("—", ""), 1);
+}
+
+for (const sel of f.querySelectorAll<HTMLSelectElement>(
+	"select[data-counties]",
+)) {
+	sel.add(new Option("—", ""));
+	for (const name of TX_COUNTIES) {
+		const isDefault = sel.dataset.default === name;
+		sel.add(new Option(name, name, isDefault, isDefault));
+	}
+}
+
+// Texas gets a county dropdown; any other state gets free text.
+// Only the active control is enabled, so only it validates and is submitted.
+const countyPairs = [
+	["county", "state"],
+	["birthCounty", "birthState"],
+	["execCounty", "execState"],
+] as const;
+
+const syncCounties = () => {
+	for (const [county, state] of countyPairs) {
+		const tx =
+			f.querySelector<HTMLSelectElement>(`select[name="${state}"]`)?.value ===
+			"TX";
+		const list = f.querySelector<HTMLSelectElement>(`select[name="${county}"]`);
+		const text = f.querySelector<HTMLInputElement>(`input[name="${county}"]`);
+		if (!list || !text) throw new Error(`County fields missing: ${county}`);
+		list.hidden = list.disabled = !tx;
+		text.hidden = text.disabled = tx;
+	}
+};
+
+for (const [, state] of countyPairs) {
+	f.querySelector(`select[name="${state}"]`)?.addEventListener(
+		"change",
+		syncCounties,
+	);
+}
+syncCounties();
 
 const bcSame = document.querySelector<HTMLInputElement>("#bcSame");
 const bcFields = document.querySelector<HTMLDivElement>("#bcFields");
@@ -91,6 +148,7 @@ document
 	?.addEventListener("click", () => {
 		f.reset();
 		syncBc();
+		syncCounties();
 		clearSig();
 		msg.textContent = "";
 	});
