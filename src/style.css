@@ -1,0 +1,26 @@
+body {
+  font: 15px system-ui;
+  max-width: 820px;
+  margin: 2em auto;
+  padding: 0 1em;
+}
+fieldset {
+  margin: 1em 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+label {
+  display: inline-block;
+  margin: 0.3em 0.8em 0.3em 0;
+}
+input {
+  padding: 4px;
+}
+button {
+  padding: 8px 14px;
+  margin: 4px;
+  cursor: pointer;
+}
+small {
+  color: #666;
+}
