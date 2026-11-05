@@ -89,3 +89,7 @@ button[type="submit"] {
 	justify-self: start;
 	margin: 0;
 }
+footer {
+	margin: 1em 0;
+	text-align: center;
+}
